@@ -14,10 +14,11 @@ docker run --rm -v "${PWD}:/code" calimera-ubuntu linux_pyinstaller_export.spec 
 
 docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src" calimera-ubuntu linux_pyinstaller_export.spec  
 
-
+### maybe change permissions since output file is limited to root
+### https://vsupalov.com/docker-shared-permissions/
 
 ### current
-docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src" -v "${PWD}:/code" calimera-ubuntu 
+docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src" -v "${PWD}:/code/dist/" calimera-ubuntu 
 
 
 
@@ -28,6 +29,8 @@ docker container run -it -v "/home/stefan/gitlab/calimera_github/src/:/code/src/
 
 from PyQt5 import QtCore
  from PyQt5 import QtQuickWidgets
+
+
 
 
 

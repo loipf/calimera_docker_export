@@ -27,9 +27,10 @@ ARG PY_VER
 RUN conda install -c anaconda -y python=${PY_VER}
 
 #RUN apt-get install -y python3-pyqt5 python-pyqt5.qtquick
+#RUN apt-get install -y python3-pyqt5 pyqt5-dev-tools python-pyqt5.qtquick
+#RUN conda install -c anaconda pyqt
 
-RUN apt-get install -y python3-pyqt5 pyqt5-dev-tools python-pyqt5.qtquick
-
+RUN apt-get install -y python3-pyqt5
 
 ### install calimera packages
 RUN pip install -r https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/raw/master/docs/py_packages_requirements.txt
@@ -44,10 +45,11 @@ WORKDIR /
 
 
 RUN mkdir /code
-#RUN chown -R user:group /code
 WORKDIR /code
 
-RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/linux_pyinstaller_export.spec
+#RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/linux_pyinstaller_export.spec
+COPY linux_pyinstaller_export.spec .
+
 
 ### download code here ? naaa
 # wget https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/archive/master/calimera-master.tar.gz?path=src
@@ -55,7 +57,7 @@ RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/lin
 
 #exec pyinstaller $@
 
-#ENTRYPOINT [ "pyinstaller", "linux_pyinstaller_export.spec" ]
+ENTRYPOINT [ "pyinstaller", "linux_pyinstaller_export.spec" ]
 
 
 
