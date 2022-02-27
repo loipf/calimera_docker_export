@@ -8,8 +8,10 @@ ARG PY_VER=3.6.8
 FROM ubuntu:${UBUNTU_VER}
 
 ### system packages 
-RUN apt-get update && apt-get install -yq curl wget jq vim bzip2 
-RUN apt-get install -y binutils libc6 libc-bin
+RUN apt-get update && apt-get install -yq \
+	curl wget jq vim bzip2 \
+	qtbase5-dev libglib2.0-0
+RUN apt-get install -y binutils libc6 libc-bin 
 
 ### Use the above args during building https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG CONDA_VER
@@ -26,19 +28,25 @@ ARG PY_VER
 ### install packages from conda and downgrade py (optional)
 RUN conda install -c anaconda -y python=${PY_VER}
 
-RUN pip install scipy==1.3.0 \ 
-	statsmodels==0.10.0 \ 
-	matplotlib==3.1.2 \ 
-	pandas==0.23.4 \ 
-	seaborn==0.9.0 \ 
-	numpy==1.15.0 \ 
-	pingouin==0.2.7 \ 
-	pygam==0.8.0 \ 
-	PyQt5==5.13.2 \
-	pyinstaller==3.5
+RUN apt-get install -y python3-pyqt5
+
+### install calimera packages
+RUN pip install -r https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/raw/master/docs/py_packages_requirements.txt
+
+
+### post process pingouin package problems
+WORKDIR /miniconda/lib/python3.6/site-packages/pingouin
+RUN rm plotting.py
+RUN rm -r datasets
+RUN sed -i "/\b\(plotting\|datasets\)\b/d" __init__.py 
+WORKDIR /
+
 
 RUN mkdir /code
+#RUN chown -R user:group /code
 WORKDIR /code
+
+RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/linux_pyinstaller_export.spec
 
 ### download code here ? naaa
 # wget https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/archive/master/calimera-master.tar.gz?path=src
@@ -46,10 +54,7 @@ WORKDIR /code
 
 #exec pyinstaller $@
 
-ENTRYPOINT [ "pyinstaller" ]
-
-
-
+ENTRYPOINT [ "pyinstaller", "linux_pyinstaller_export.spec" ]
 
 
 

@@ -37,17 +37,27 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
-          [],
+          exclude_binaries=True,
+          #name='calimera_'+ cal_version,
           name='main',
-          debug=False,
-          bootloader_ignore_signals=False,
+          debug=True,  #
           strip=False,
           upx=True,
-          upx_exclude=[],
-          runtime_tmpdir=None,
           console=False,
           icon=src_path + 'logo_pics/calimero_logo.icns' )  #
 
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='collect')
+
+app = BUNDLE(coll,
+             name='calimera_' + cal_version + '.app',
+             icon=src_path + 'logo_pics/calimero_logo.icns',
+             console=False,
+             bundle_identifier=None,     
+             info_plist={ 'NSHighResolutionCapable': 'True'} 
+)
