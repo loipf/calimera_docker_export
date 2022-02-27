@@ -1,0 +1,19 @@
+### docker for calimera
+### edited from: https://github.com/cdrx/docker-pyinstaller
+
+docker build -t calimera-ubuntu .
+
+docker container run -it calimera-ubuntu
+
+
+
+docker run --rm -v "${PWD}:/code" calimera-ubuntu --onefile example.py
+
+docker run --rm -v "${PWD}:/code" calimera-ubuntu --onefile example.py
+
+
+docker run --rm -v "${PWD}:/code" calimera-ubuntu linux_pyinstaller_export.spec /home/stefan/gitlab/calimera_github/src/ 
+
+docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code" calimera-ubuntu linux_pyinstaller_export.spec  
+
+
