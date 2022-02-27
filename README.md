@@ -1,5 +1,4 @@
 ## docker for exporting calimera software
-edited from: https://gist.github.com/pangyuteng/f5b00fe63ac31a27be00c56996197597
 
 1. build docker once
 2. run pyinstaller in this docker to create a executable calimera app
@@ -21,6 +20,7 @@ possible improvements:
 - ubuntu: maybe change permissions since output file is limited to root [https://vsupalov.com/docker-shared-permissions/]
 
 
-
+---
+edited from: https://gist.github.com/pangyuteng/f5b00fe63ac31a27be00c56996197597
 
 
