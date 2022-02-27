@@ -8,9 +8,7 @@ ARG PY_VER=3.6.8
 FROM ubuntu:${UBUNTU_VER}
 
 ### system packages 
-RUN apt-get update && apt-get install -yq \
-	curl wget jq vim bzip2 \
-	qtbase5-dev libglib2.0-0
+RUN apt-get update && apt-get install -yq curl wget jq vim bzip2 libglib2.0-0
 RUN apt-get install -y binutils libc6 libc-bin 
 
 ### Use the above args during building https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
@@ -28,7 +26,10 @@ ARG PY_VER
 ### install packages from conda and downgrade py (optional)
 RUN conda install -c anaconda -y python=${PY_VER}
 
-RUN apt-get install -y python3-pyqt5
+#RUN apt-get install -y python3-pyqt5 python-pyqt5.qtquick
+
+RUN apt-get install -y python3-pyqt5 pyqt5-dev-tools python-pyqt5.qtquick
+
 
 ### install calimera packages
 RUN pip install -r https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/raw/master/docs/py_packages_requirements.txt
@@ -54,7 +55,7 @@ RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/lin
 
 #exec pyinstaller $@
 
-ENTRYPOINT [ "pyinstaller", "linux_pyinstaller_export.spec" ]
+#ENTRYPOINT [ "pyinstaller", "linux_pyinstaller_export.spec" ]
 
 
 

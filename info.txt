@@ -27,4 +27,7 @@ sudo rm -r build/ dist/ src/
 docker container run -it -v "/home/stefan/gitlab/calimera_github/src/:/code/src/" calimera-ubuntu
 
 from PyQt5 import QtCore
+ from PyQt5 import QtQuickWidgets
+
+
 

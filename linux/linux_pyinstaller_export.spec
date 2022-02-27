@@ -12,7 +12,7 @@ a = Analysis([src_path+'main_data/main.py'],
              pathex=[output_path],
              
              datas=[],
-hiddenimports=['pandas._libs.tslibs.timedeltas','seaborn','scipy._lib.messagestream','pygam','pandas._libs.tslibs.np_datetime','pandas._libs.tslibs.nattype','pandas._libs.skiplist','matplotlib.backends.backend_macosx','pingouin','PyQt5.sip'],
+hiddenimports=['pandas._libs.tslibs.timedeltas','seaborn','scipy._lib.messagestream','pygam','pandas._libs.tslibs.np_datetime','pandas._libs.tslibs.nattype','pandas._libs.skiplist','matplotlib.backends.backend_macosx','pingouin','PyQt5'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
