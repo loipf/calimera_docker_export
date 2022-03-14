@@ -40,7 +40,7 @@ RUN rm -r datasets
 RUN sed -i "/\b\(plotting\|datasets\)\b/d" __init__.py 
 WORKDIR /
 
-
+### pyinstaller directory
 RUN mkdir /code
 WORKDIR /code
 
