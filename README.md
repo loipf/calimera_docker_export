@@ -1,8 +1,9 @@
 ## docker for exporting calimera software
 
-1. build docker once
-2. edit only path to `calimera/src/` folder
-3. run pyinstaller in this docker to create a executable calimera app
+1. install docker [https://docs.docker.com/get-docker/]
+2. build docker once
+3. edit only path to `calimera/src/` folder
+4. run pyinstaller in this docker to create a executable calimera app
 
 
 ---
@@ -25,7 +26,7 @@ docker run --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" ca
 
 ---
 
-# manual configuration in case of error:
+### manual configuration in case of error:
 ```sh
 ### move in docker environment
 docker run -it --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" --entrypoint /bin/bash calimera_win
@@ -48,8 +49,7 @@ possible improvements:
 
 
 ---
-edited from:
-https://gist.github.com/pangyuteng/f5b00fe63ac31a27be00c56996197597
-https://github.com/cdrx/docker-pyinstaller/blob/master/Dockerfile-py3-win64
-
+edited from:  
+https://gist.github.com/pangyuteng/f5b00fe63ac31a27be00c56996197597  
+https://github.com/cdrx/docker-pyinstaller/blob/master/Dockerfile-py3-win64  
 
