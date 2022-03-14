@@ -1,27 +1,29 @@
-
-## docker for exporting calimera software
-edited from: https://gist.github.com/pangyuteng/f5b00fe63ac31a27be00c56996197597
-
-1. build docker once
-2. run pyinstaller in this docker to create a executable calimera app
+problems:
 
 
----
-### ubuntu (>=16.04)
-```sh
-docker build -t calimera_ubuntu https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/Dockerfile
-docker run --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "${PWD}:/code/dist/" calimera_ubuntu
-```
+linux:
+- Fontconfig error: "/etc/fonts/conf.d/90-synthetic.conf", line 5: invalid attribute 'selector'
+- libGL error: failed to load driver: swrast
+- Failed to create OpenGL context for format QSurfaceFormat
 
 
 
 
----
-possible improvements:
-
-- ubuntu: maybe change permissions since output file is limited to root [https://vsupalov.com/docker-shared-permissions/]
 
 
+############################################
+### test commands for me:
+
+docker build -t calimera-ubuntu .
+docker container run -it calimera-ubuntu
+
+docker run --rm -v "${PWD}:/code" calimera-ubuntu --onefile example.py
+
+docker container run -it -v "/home/stefan/gitlab/calimera_github/src/:/code/src/" -v "${PWD}:/code" calimera_win
+
+docker build -t calimera_win .
+
+sudo rm -r build dist 
 
 
 

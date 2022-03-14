@@ -3,9 +3,9 @@
 block_cipher = None
 
 
-cal_version = 'v03'
+
 src_path = '/code/src/'
-output_path = '/code/calimera_' + cal_version
+output_path = '/code/calimera'
 
 
 a = Analysis([src_path+'main_data/main.py'],
@@ -40,7 +40,7 @@ exe = EXE(pyz,
           a.binaries,
           a.datas,
           [],
-          name='calimera_'+cal_version,
+          name='linux_calimera',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

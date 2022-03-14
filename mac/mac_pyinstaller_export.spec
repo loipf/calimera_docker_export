@@ -3,9 +3,8 @@
 block_cipher = None
 
 
-cal_version = 'v03'
 src_path = '/code/src/'
-output_path = '/code/calimera_' + cal_version
+output_path = '/code/calimera'
 
 
 a = Analysis([src_path+'main_data/main.py'],
@@ -38,7 +37,6 @@ pyz = PYZ(a.pure, a.zipped_data,
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          #name='calimera_'+ cal_version,
           name='main',
           debug=True,  #
           strip=False,
@@ -55,7 +53,7 @@ coll = COLLECT(exe,
                name='collect')
 
 app = BUNDLE(coll,
-             name='calimera_' + cal_version + '.app',
+             name='mac_calimera.app',
              icon=src_path + 'logo_pics/calimero_logo.icns',
              console=False,
              bundle_identifier=None,     
