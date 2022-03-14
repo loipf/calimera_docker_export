@@ -6,11 +6,32 @@
 
 
 ---
+
+### windows
+```sh
+docker build -t calimera_win https://raw.githubusercontent.com/loipf/calimera_docker_export/main/win/Dockerfile
+
+docker run --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" calimera_win
+```
+
+
+
 ### ubuntu (>=16.04)
 ```sh
 docker build -t calimera_ubuntu https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/Dockerfile
 
 docker run --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" calimera_ubuntu
+```
+
+---
+
+# manual configuration in case of error:
+```sh
+### move in docker environment
+docker run -it --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" --entrypoint /bin/bash calimera_win
+
+## run pyinstaller within docker:
+pyinstaller win_pyinstaller_export.spec
 ```
 
 
@@ -21,6 +42,8 @@ possible improvements:
 
 - add version date to output name
 - ubuntu: maybe change permissions since output file is limited to root [https://vsupalov.com/docker-shared-permissions/]
+- error `standard_init_linux.go:211: exec user process caused "exec format error"` can occur with different architectures, fix
+`docker buildx build --platform=linux/amd64 -t <image-name> .`
 
 
 

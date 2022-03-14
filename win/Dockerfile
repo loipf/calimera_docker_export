@@ -94,7 +94,6 @@ WORKDIR /code
 
 RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/win/win_pyinstaller_export.spec
 
-
 ENTRYPOINT [ "pyinstaller", "win_pyinstaller_export.spec" ]
 
 
