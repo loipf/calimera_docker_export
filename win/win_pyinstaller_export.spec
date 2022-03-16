@@ -4,10 +4,7 @@ block_cipher = None
 
 
 src_path = '/code/src/'
-output_path = '/code/calimera'
-
-src_path = 'src\\'
-output_path = 'C:\\Users\\stefan\\Desktop\\pyinstaller_try\\' 
+output_path = '/code/'
 
 
 a = Analysis([src_path+'main_data\\main.py'],

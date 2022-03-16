@@ -3,9 +3,8 @@
 block_cipher = None
 
 
-
 src_path = '/code/src/'
-output_path = '/code/calimera'
+output_path = '/code/'
 
 
 a = Analysis([src_path+'main_data/main.py'],
