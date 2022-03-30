@@ -43,5 +43,5 @@ exe = EXE(pyz,
           debug=False,  #
           strip=False,
           upx=True,
-          console=True,
+          console=False,
           icon=src_path + 'logo_pics\\calimero_logo.ico' )  #
