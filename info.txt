@@ -1,12 +1,14 @@
 problems:
 
 
-linux:
+linux errors but nothing serious:
 - Fontconfig error: "/etc/fonts/conf.d/90-synthetic.conf", line 5: invalid attribute 'selector'
-- libGL error: failed to load driver: swrast
+- libGL error: failed to load driver: swrast   - apt-get intall -y mesa-utils and libgl1-mesa-glx
 - Failed to create OpenGL context for format QSurfaceFormat
 
-
+improvements:
+- add cacheburst: ARG CACHEBUST=1, docker build --build-arg CACHEBUST=`git rev-parse ${GITHUB_REF}` ..
+from: https://stackoverflow.com/questions/35134713/disable-cache-for-specific-run-commands
 
 
 
@@ -20,12 +22,57 @@ docker container run -it calimera-ubuntu
 docker run --rm -v "${PWD}:/code" calimera-ubuntu --onefile example.py
 
 docker container run -it -v "/home/stefan/gitlab/calimera_github/src/:/code/src/" -v "${PWD}:/code" calimera_win
+docker run -it --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src/" -v "${PWD}:/code/dist/" --entrypoint /bin/bash calimera_win
+
+docker run -it --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "/home/stefan/gitlab/calimera_docker_export/win/win_pyinstaller_export.spec:/code/win_pyinstaller_export.spec" -v "${PWD}:/code/dist/" calimera_win 
+pyinstaller win_pyinstaller_export.spec
 
 docker build -t calimera_win .
 
 sudo rm -r build dist 
 
 docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src" -v "${PWD}:/code/dist/" calimera_win
+
+
+### mac
+docker build -t calimera_mac .
+docker container run -it calimera_mac
+
+
+## manual export
+docker run -it --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "/home/stefan/gitlab/calimera_docker_export/linux/linux_pyinstaller_export_test.spec:/code/linux_pyinstaller_export.spec" -v "${PWD}:/code/dist/" --entrypoint /bin/bash calimera_ubuntu
+
+
+docker run -it --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "/home/stefan/gitlab/calimera_docker_export/win/win_pyinstaller_export.spec:/code/win_pyinstaller_export.spec" -v "${PWD}:/code/dist/" --entrypoint /bin/bash calimera_win
+pyinstaller win_pyinstaller_export.spec
+
+
+
+### try mac
+
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    sickcodes/docker-osx:high-sierra
+
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v "/home/stefan/gitlab/calimera/src/:/home/arch/OSX-KVM/code/src" \
+    -v "/home/stefan/gitlab/calimera_docker_export/mac/mac_pyinstaller_export.spec:/home/arch/OSX-KVM/code/mac_pyinstaller_export.spec" \
+    -v "${PWD}:/home/arch/OSX-KVM/code/code/dist/"
+    --entrypoint /bin/bash
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    sickcodes/docker-osx:high-sierra
+
+
+
+
+
+
 
 
 

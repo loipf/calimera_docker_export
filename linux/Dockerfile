@@ -30,7 +30,7 @@ RUN apt-get install -y python3-pyqt5
 
 
 ### install calimera packages
-RUN pip install -r https://ascgitlab.helmholtz-muenchen.de/computationaldiscovery/calimeradev/calimera/-/raw/master/docs/py_packages_requirements.txt
+RUN pip install -r https://raw.githubusercontent.com/loipf/calimera_docker_export/main/py_packages_requirements.txt
 
 
 ### post process pingouin package problems

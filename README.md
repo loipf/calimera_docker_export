@@ -42,6 +42,7 @@ pyinstaller win_pyinstaller_export.spec
 possible improvements:
 
 - add version date to output name
+- remove `console=True` argument in `.spec` files for export - only for easier debugging
 - ubuntu: maybe change permissions since output file is limited to root [https://vsupalov.com/docker-shared-permissions/]
 - error `standard_init_linux.go:211: exec user process caused "exec format error"` can occur with different architectures, fix
 `docker buildx build --platform=linux/amd64 -t <image-name> .`

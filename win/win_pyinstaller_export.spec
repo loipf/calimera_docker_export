@@ -3,13 +3,12 @@
 block_cipher = None
 
 
-src_path = '/code/src/'
-output_path = '/code/'
+src_path = 'src\\'
+output_path = '\\code\\'
 
 
 a = Analysis([src_path+'main_data\\main.py'],
              pathex=[output_path],
-             binaries=[],
              datas=[],
              hiddenimports=['matplotlib','pandas','seaborn','pygam','pingouin','PyQt5.sip','scipy._lib.messagestream', 'PyQt5.QtQuickWidgets'],
              hookspath=[],
@@ -37,11 +36,12 @@ pyz = PYZ(a.pure, a.zipped_data,
 exe = EXE(pyz,
           a.scripts,
           a.binaries,
-          a.zipfiles,
           a.datas,
+          [],
           name='win_calimera',
           debug=False,  #
           strip=False,
           upx=True,
           console=False,
-          icon=src_path + 'logo_pics\\calimero_logo.ico' )  #
+          icon=src_path + 'logo_pics\\calimero_logo.ico' )  
+
