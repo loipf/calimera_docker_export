@@ -17,7 +17,7 @@ from: https://stackoverflow.com/questions/35134713/disable-cache-for-specific-ru
 ### test commands for me:
 
 docker build -t calimera-ubuntu .
-docker container run -it calimera-ubuntu
+docker container run -it calimera_ubuntu
 
 docker run --rm -v "${PWD}:/code" calimera-ubuntu --onefile example.py
 
