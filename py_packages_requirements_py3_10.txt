@@ -1,0 +1,14 @@
+matplotlib==3.5.2
+numpy==1.23.1
+pandas==1.4.3
+pingouin==0.5.2
+pyinstaller==5.2
+pygam==0.8.0
+PyQt5==5.15.7
+scipy==1.8.1
+seaborn==0.11.2
+statsmodels==0.13.2
+tabulate==0.8.10
+
+### python version 3.10.5
+# pipreqs /path/to/project
