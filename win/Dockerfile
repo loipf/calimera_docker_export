@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 #ENV DEBIAN_FRONTEND noninteractive
 
 ARG WINE_VERSION=winehq-staging
-ARG PY_VER=3.6.8
+ARG PY_VER=3.9.12
 
 
 # we need wine for this all to work, so we'll use the PPA
@@ -70,15 +70,9 @@ RUN set -x \
     && cp "$W_TMP"/*.dll "$W_SYSTEM64_DLLS"/
 
 
-### install calimera packages
-RUN /usr/bin/pip install -r https://raw.githubusercontent.com/loipf/calimera_docker_export/main/py_packages_requirements.txt
-
-### post process pingouin package problems
-WORKDIR /wine/drive_c/Python37/Lib/site-packages/pingouin
-RUN rm plotting.py
-RUN rm -r datasets
-RUN sed -i "/\b\(plotting\|datasets\)\b/d" __init__.py 
-WORKDIR /
+### install calimera packages - gitlab path not public yet - TODO CHANGE PATH
+# RUN /usr/bin/pip install -r https://raw.githubusercontent.com/loipf/calimera_docker_export/main/py_packages_requirements.txt
+RUN /usr/bin/pip -r https://raw.githubusercontent.com/loipf/calimera_docker_export/main/py_packages_requirements_py39.txt
 
 
 # put the src folder inside wine
@@ -92,7 +86,10 @@ RUN mkdir -p /wine/drive_c/tmp
 RUN mkdir /code
 WORKDIR /code
 
+
+# RUN wget https://gitlab.com/computational-discovery-research/calimera/-/raw/master/export_version/win/win_pyinstaller_export.spec
 RUN wget https://raw.githubusercontent.com/loipf/calimera_docker_export/main/win/win_pyinstaller_export.spec
+
 
 ENTRYPOINT [ "pyinstaller", "win_pyinstaller_export.spec" ]
 

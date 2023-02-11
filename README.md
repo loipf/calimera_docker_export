@@ -3,10 +3,11 @@
 1. install docker [https://docs.docker.com/get-docker/]
 2. build docker once
 3. edit only path to `calimera/src/` folder
-4. run pyinstaller in this docker to create a executable calimera app
-
+(4. run pyinstaller in this docker to create a executable calimera app)
 
 ---
+
+## download images from dockerhub and 
 
 ### windows
 ```sh
@@ -17,7 +18,23 @@ docker run --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" ca
 
 
 
-### ubuntu (>=16.04)
+
+
+
+---
+
+# oldschool manual way
+
+### windows
+```sh
+docker build -t calimera_win https://raw.githubusercontent.com/loipf/calimera_docker_export/main/win/Dockerfile
+
+docker run --rm -v "/path/to/calimera/src/:/code/src" -v "${PWD}:/code/dist/" calimera_win
+```
+
+
+
+### ubuntu (>=20.04)
 ```sh
 docker build -t calimera_ubuntu https://raw.githubusercontent.com/loipf/calimera_docker_export/main/linux/Dockerfile
 

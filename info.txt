@@ -32,6 +32,8 @@ docker build -t calimera_win .
 sudo rm -r build dist 
 
 docker run --rm -v "/home/stefan/gitlab/calimera_github/src/:/code/src" -v "${PWD}:/code/dist/" calimera_win
+docker run --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "${PWD}:/code/dist/" calimera_ubuntu
+docker run -it --rm -v "/home/stefan/gitlab/calimera/src/:/code/src" -v "/home/stefan/gitlab/calimera_docker_export/win/win_pyinstaller_export.spec:/code/win_pyinstaller_export.spec" -v "${PWD}:/code/dist/" calimera_win 
 
 
 ### mac
@@ -69,7 +71,48 @@ docker run -it \
     sickcodes/docker-osx:high-sierra
 
 
+### new docker mac try
+docker pull sickcodes/docker-osx:naked-auto
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    -v "${PWD}/mac_hdd_ng_auto_monterey:/image" \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    -e "USERNAME=user" \
+    -e "PASSWORD=alpine" \
+    -e GENERATE_UNIQUE=true \
+    -e MASTER_PLIST_URL=https://raw.githubusercontent.com/sickcodes/Docker-OSX/master/custom/config-nopicker-custom.plist \
+    sickcodes/docker-osx:naked-auto
 
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    sickcodes/docker-osx:high-sierra
+
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e EXTRA="-display none" \
+    sickcodes/docker-osx:high-sierra
+
+docker run -it \
+    --device /dev/kvm \
+    -p 50922:10022 \
+    sickcodes/docker-osx:auto
+
+
+
+### export to docker hub
+docker login -u calimera
+docker tag calimera_ubuntu calimera/calimera_ubuntu:0.1.0
+docker push calimera/calimera_ubuntu:0.1.0
+
+docker tag calimera_win calimera/calimera_win:0.1.0
+docker push calimera/calimera_win:0.1.0
 
 
 
